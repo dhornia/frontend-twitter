@@ -3,20 +3,24 @@ import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+
+import { setUser } from "../redux/userSlice";
 
 function Login() {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const response = await axios({
-      url: "https://ha-proyecto-base-api-mongoose.vercel.app/tokens",
+      url: `${import.meta.env.VITE_API_URL}/tokens`,
       method: "post",
       data: { email, password },
     });
-    console.log(response.data);
+    dispatch(setUser(response.data));
   };
 
   return (
@@ -62,7 +66,9 @@ function Login() {
                   <button className="btn btn-primary">Login</button>
                 </div>
               </form>
-              <p className="text-center">Don't have an account? Sign up</p>
+              <p className="text-center">
+                Don't have an account? <NavLink to={"/signup"}>Sign up</NavLink>
+              </p>
             </div>
           </Col>
         </Row>

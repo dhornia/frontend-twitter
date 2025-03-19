@@ -6,9 +6,13 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import "./index.css";
 import { store, persistor } from "./redux/storeConfig.js";
-import Home from "./components/Home.jsx";
+import SignUp from "./components/SignUp.jsx";
+import Login from "./components/LogIn.jsx";
 
-const router = createBrowserRouter([{ path: "/", element: <Home /> }]);
+const router = createBrowserRouter([
+  { path: "/", element: <Login /> },
+  { path: "/signup", element: <SignUp /> },
+]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

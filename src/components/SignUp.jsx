@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [firstname, setFirstname] = useState("");
@@ -11,17 +12,18 @@ function SignUp() {
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     const formValues = new FormData(e.target); //Necesario debido a formidable
     const response = await axios({
-      url: "https://ha-proyecto-base-api-mongoose.vercel.app/users",
+      url: `${import.meta.env.VITE_API_URL}/users`,
       method: "post",
       headers: { "Content-Type": "multipart-form-data" }, //Necesario debido a formidable
       data: formValues,
     });
-    console.log(response);
+    navigate("/");
   };
 
   return (
@@ -113,7 +115,9 @@ function SignUp() {
                   <button className="btn btn-primary">Sign up</button>
                 </div>
               </form>
-              <p className="text-center">Already have an account? Sign in</p>
+              <p className="text-center">
+                Already have an account? <NavLink to={"/"}>Sign in</NavLink>
+              </p>
             </div>
           </Col>
         </Row>
