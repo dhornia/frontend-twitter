@@ -8,10 +8,12 @@ import "./index.css";
 import { store, persistor } from "./redux/storeConfig.js";
 import SignUp from "./components/SignUp.jsx";
 import Login from "./components/LogIn.jsx";
+import Home from "./components/Home.jsx";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Login /> },
+  { path: "/", element: <Home /> },
   { path: "/signup", element: <SignUp /> },
+  { path: "/login", element: <Login /> },
 ]);
 
 createRoot(document.getElementById("root")).render(

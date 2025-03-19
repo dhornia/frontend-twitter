@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { nanoid } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 import Tweet from "./Tweet";
 import Avatar from "./Avatar";
@@ -31,6 +32,13 @@ function Home() {
   const tweets = useSelector((state) => state.tweets);
   const user = useSelector((state) => state.user);
   const [content, setContent] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.accessToken) {
+      return navigate("/login");
+    }
+  }, []);
 
   const handlePostTweet = async (e) => {
     e.preventDefault();
