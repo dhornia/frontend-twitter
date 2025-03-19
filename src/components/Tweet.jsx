@@ -1,22 +1,22 @@
 import React from "react";
 
-function Tweet() {
-  return (
-    <div className="border border-secondary p-3 d-flex gap-3">
-      <img src="images/avatars/hack-academy.jpg" className="rounded-circle avatar" alt="Avatar" />
+import Avatar from "./Avatar";
 
+function Tweet({ firstname, lastname, username, likes, content, avatar, createdAt }) {
+  return (
+    <div className="p-3 d-flex gap-3 border-start border-end border-bottom border-secondary">
+      <Avatar imageName={avatar} />
       <div className="text-container">
         <p className="text-white fw-semibold mb-0">
-          Hack Academy&nbsp;&nbsp;{" "}
-          <span className="fw-lighter text-secondary">@HackAcademyDev • Oct 12</span>
+          {firstname} {lastname} &nbsp;&nbsp;
+          <span className="text-secondary fw-normal">
+            @{username} • {createdAt}
+          </span>
         </p>
-        <p className="text-white mb-0">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel purus non justo
-          ullamcorper tincidunt non non neque.
-        </p>
+        <p className="text-white mb-0 fw-lighter">{content}</p>
         <p className="pt-2 mb-0">
           <i className="bi bi-heart text-secondary me-2"></i>
-          <span className="text-secondary">120</span>
+          <span className="text-secondary">{likes}</span>
         </p>
       </div>
     </div>
