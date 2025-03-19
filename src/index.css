@@ -4,3 +4,20 @@
   object-fit: cover;
   border-radius: 50%;
 }
+
+.full-screen-dark-blue {
+  position: absolute;
+  background-color: #15202b;
+  height: 100%;
+  width: 100%;
+}
+
+.secondary-dark-blue {
+  background-color: #28384c;
+}
+
+@media screen and (max-width: 767px) {
+  .rounded-end {
+    border-radius: 1%;
+  }
+}
