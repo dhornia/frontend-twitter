@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import tweetsReducer from "./tweetsSlice";
+import userReducer from "./userSlice";
 
 const persistConfig = {
   key: "root",
@@ -19,7 +20,7 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({ tweets: tweetsReducer });
+const rootReducer = combineReducers({ tweets: tweetsReducer, user: userReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
