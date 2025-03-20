@@ -6,25 +6,26 @@ import { useNavigate } from "react-router-dom";
 
 import Tweet from "./Tweet";
 import Avatar from "./Avatar";
+import Trending from "./Trending";
 
 const trending = [
   {
     id: nanoid(),
     category: "Programming",
     tag: "MongoVsSequelize",
-    tweets: "97.5K",
+    tweetsQty: "97.5K",
   },
   {
     id: nanoid(),
     category: "Entertainment",
     tag: "StarWars",
-    tweets: "97.5K",
+    tweetsQty: "97.5K",
   },
   {
     id: nanoid(),
     category: "News",
     tag: "LifeInMars",
-    tweets: "97.5K",
+    tweetsQty: "97.5K",
   },
 ];
 
@@ -109,9 +110,7 @@ function Home() {
             <ul className="list-unstyled">
               {trending.map((item) => (
                 <li key={item.id} className="mb-3">
-                  <p className="text-secondary mb-0">{item.category} • Trending</p>
-                  <p className="fw-bold text-white mb-0">#{item.tag}</p>
-                  <p className="text-secondary mb-0">{item.tweets} Tweets</p>
+                  <Trending category={item.category} tag={item.tag} tweetsQty={item.tweetsQty} />
                 </li>
               ))}
             </ul>

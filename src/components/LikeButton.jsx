@@ -14,7 +14,6 @@ function LikeButton({ tweetId, likesQty }) {
     .find((tweet) => tweet._id.toString() === tweetId)
     ?.likes.some((uId) => uId.toString() === userId);
 
-  console.log(isLiked);
   const handleLike = async () => {
     dispatch(toggleLike({ tweetId, userId }));
 
