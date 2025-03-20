@@ -19,7 +19,7 @@ function LikeButton({ tweetId, likesQty }) {
 
     try {
       await axios({
-        url: `${import.meta.env.VITE_API_URL}/tweets`,
+        url: `${import.meta.env.VITE_API_URL}/tweets/${tweetId}/likes`,
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${user.accessToken}`,
