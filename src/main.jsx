@@ -9,9 +9,15 @@ import { store, persistor } from "./redux/storeConfig.js";
 import SignUp from "./components/SignUp.jsx";
 import Login from "./components/LogIn.jsx";
 import Home from "./components/Home.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Home /> },
+  {
+    path: "/",
+    element: <ProtectedRoute />,
+    children: [{ path: "", element: <Home /> }],
+  },
+  ,
   { path: "/signup", element: <SignUp /> },
   { path: "/login", element: <Login /> },
 ]);
