@@ -1,33 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { nanoid } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
 import Tweet from "./Tweet";
 import Avatar from "./Avatar";
 import Trending from "./Trending";
-
-const trending = [
-  {
-    id: nanoid(),
-    category: "Programming",
-    tag: "MongoVsSequelize",
-    tweetsQty: "97.5K",
-  },
-  {
-    id: nanoid(),
-    category: "Entertainment",
-    tag: "StarWars",
-    tweetsQty: "97.5K",
-  },
-  {
-    id: nanoid(),
-    category: "News",
-    tag: "LifeInMars",
-    tweetsQty: "97.5K",
-  },
-];
 
 function Home() {
   const tweets = useSelector((state) => state.tweets);
@@ -105,15 +83,8 @@ function Home() {
             </ul>
           </div>
 
-          <div className="col-4 d-none d-md-block trending align-self-start mt-4 p-3">
-            <p className="fs-4 text-white">What’s happening</p>
-            <ul className="list-unstyled">
-              {trending.map((item) => (
-                <li key={item.id} className="mb-3">
-                  <Trending category={item.category} tag={item.tag} tweetsQty={item.tweetsQty} />
-                </li>
-              ))}
-            </ul>
+          <div className="col-4 d-none d-md-block">
+            <Trending />
           </div>
         </div>
       </div>
