@@ -30,3 +30,14 @@
   background-color: #1e2732;
   border-radius: 15px;
 }
+
+.border-blue {
+  border-bottom: 1px solid #2e3e4f;
+  border-left: 1px solid #2e3e4f;
+  border-right: 1px solid #2e3e4f;
+}
+
+.custom-color,
+i.custom-color {
+  color: #f91894;
+}

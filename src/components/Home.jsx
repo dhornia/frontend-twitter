@@ -65,17 +65,18 @@ function Home() {
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-8">
-            <div className="border-start border-end border-bottom border-secondary p-3">
+            <div className="border-blue p-3">
               <p className="text-white fs-4">Home</p>
-              <div className="d-flex pt-3 align-items-center">
-                <Avatar imageName={user.userData?.avatar} />
-                <p className="fs-4 text-secondary mb-0">What's happening?</p>
-              </div>
               <form action="" onSubmit={handlePostTweet} className="d-flex flex-column">
-                <div className="mb-3 d-flex pt-3">
-                  <label htmlFor="content" className="form-label" hidden>
-                    Post content
+                <div className="d-flex pt-3 align-items-center">
+                  <div className="me-3">
+                    <Avatar imageName={user.avatar} />
+                  </div>
+                  <label htmlFor="content" className="fs-4 text-secondary mb-0">
+                    What's happening?
                   </label>
+                </div>
+                <div className="mb-3 d-flex pt-3">
                   <textarea
                     id="content"
                     name="content"
