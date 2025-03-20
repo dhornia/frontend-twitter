@@ -1,23 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 import Tweet from "./Tweet";
 import Avatar from "./Avatar";
 import Trending from "./Trending";
+import { setTweets } from "../redux/tweetsSlice";
 
 function Home() {
   const tweets = useSelector((state) => state.tweets);
   const user = useSelector((state) => state.user);
   const [content, setContent] = useState("");
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!user.accessToken) {
-      return navigate("/login");
+  const getTweets = async () => {
+    try {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/tweets`,
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
+
+      dispatch(setTweets(response.data));
+    } catch (err) {
+      console.log(err);
     }
-  }, []);
+  };
 
   const handlePostTweet = async (e) => {
     e.preventDefault();
@@ -27,7 +37,7 @@ function Home() {
         url: `${import.meta.env.VITE_API_URL}/tweets`,
         method: "POST",
         headers: {
-          Authorization: `Bearer ${user.accessToken}}`,
+          Authorization: `Bearer ${user.accessToken}`,
         },
         data: {
           content,
@@ -37,7 +47,14 @@ function Home() {
     } catch (err) {
       console.log(err);
     }
+
+    setContent("");
+    getTweets();
   };
+
+  useEffect(() => {
+    getTweets();
+  }, []);
 
   return (
     <div className="home">

@@ -22,7 +22,7 @@ function LikeButton({ tweetId, likesQty }) {
         url: `${import.meta.env.VITE_API_URL}/tweets`,
         method: "PATCH",
         headers: {
-          Authorization: `Bearer ${user.accessToken}}`,
+          Authorization: `Bearer ${user.accessToken}`,
         },
         data: {
           userId,
