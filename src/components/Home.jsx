@@ -1,36 +1,33 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { nanoid } from "@reduxjs/toolkit";
 
 import Tweet from "./Tweet";
 import Avatar from "./Avatar";
-
-const trending = [
-  {
-    id: nanoid(),
-    category: "Programming",
-    tag: "MongoVsSequelize",
-    tweets: "97.5K",
-  },
-  {
-    id: nanoid(),
-    category: "Entertainment",
-    tag: "StarWars",
-    tweets: "97.5K",
-  },
-  {
-    id: nanoid(),
-    category: "News",
-    tag: "LifeInMars",
-    tweets: "97.5K",
-  },
-];
+import Trending from "./Trending";
+import { setTweets } from "../redux/tweetsSlice";
 
 function Home() {
   const tweets = useSelector((state) => state.tweets);
   const user = useSelector((state) => state.user);
   const [content, setContent] = useState("");
+  const dispatch = useDispatch();
+
+  const getTweets = async () => {
+    try {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/tweets`,
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
+
+      dispatch(setTweets(response.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handlePostTweet = async (e) => {
     e.preventDefault();
@@ -40,34 +37,42 @@ function Home() {
         url: `${import.meta.env.VITE_API_URL}/tweets`,
         method: "POST",
         headers: {
-          Authorization: `Bearer ${user.accessToken}}`,
+          Authorization: `Bearer ${user.accessToken}`,
         },
         data: {
           content,
-          author: user.id,
+          user: user.id,
         },
       });
     } catch (err) {
       console.log(err);
     }
+
+    setContent("");
+    getTweets();
   };
+
+  useEffect(() => {
+    getTweets();
+  }, []);
 
   return (
     <div className="home">
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-8">
-            <div className="border-start border-end border-bottom border-secondary p-3">
+            <div className="border-blue p-3">
               <p className="text-white fs-4">Home</p>
-              <div className="d-flex pt-3 align-items-center">
-                <Avatar imageName={user.userData?.avatar} />
-                <p className="fs-4 text-secondary mb-0">What's happening?</p>
-              </div>
               <form action="" onSubmit={handlePostTweet} className="d-flex flex-column">
-                <div className="mb-3 d-flex pt-3">
-                  <label htmlFor="content" className="form-label" hidden>
-                    Post content
+                <div className="d-flex pt-3 align-items-center">
+                  <div className="me-3">
+                    <Avatar imageName={user.avatar} />
+                  </div>
+                  <label htmlFor="content" className="fs-4 text-secondary mb-0">
+                    What's happening?
                   </label>
+                </div>
+                <div className="mb-3 d-flex pt-3">
                   <textarea
                     id="content"
                     name="content"
@@ -95,17 +100,8 @@ function Home() {
             </ul>
           </div>
 
-          <div className="col-4 d-none d-md-block trending align-self-start mt-4 p-3">
-            <p className="fs-4 text-white">What’s happening</p>
-            <ul className="list-unstyled">
-              {trending.map((item) => (
-                <li key={item.id} className="mb-3">
-                  <p className="text-secondary mb-0">{item.category} • Trending</p>
-                  <p className="fw-bold text-white mb-0">#{item.tag}</p>
-                  <p className="text-secondary mb-0">{item.tweets} Tweets</p>
-                </li>
-              ))}
-            </ul>
+          <div className="col-4 d-none d-md-block">
+            <Trending />
           </div>
         </div>
       </div>
