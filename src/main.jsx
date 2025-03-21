@@ -23,6 +23,7 @@ const router = createBrowserRouter([
   { path: "/signup", element: <SignUp /> },
   { path: "/login", element: <Login /> },
   { path: "*", element: <NotFound /> },
+  { path: "/profile", element: <Profile />},
 ]);
 
 createRoot(document.getElementById("root")).render(
