@@ -6,8 +6,9 @@ import Tweet from "./Tweet";
 import Avatar from "./Avatar";
 import Trending from "./Trending";
 import { setTweets } from "../redux/tweetsSlice";
+import ImgBg from "./background";
 
-function Home() {
+function Profile() {
   const tweets = useSelector((state) => state.tweets);
   const user = useSelector((state) => state.user);
   const [content, setContent] = useState("");
@@ -57,12 +58,12 @@ function Home() {
   }, []);
 
   return (
-    <div className="home">
+    <div className="Profile">
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-8">
             <div className="border-blue p-3">
-              <p className="text-white fs-4">Home</p>
+              <p className="text-white fs-4">Profile</p>
               <form action="" onSubmit={handlePostTweet} className="d-flex flex-column">
                 <div className="d-flex pt-3 align-items-center">
                   <div className="me-3">
@@ -109,4 +110,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Profile;

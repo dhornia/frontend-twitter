@@ -12,6 +12,7 @@ import Home from "./components/Home.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Login from "./components/Login.jsx";
 import NotFound from "./components/NotFound.jsx";
+import Profile from "./components/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,11 +20,17 @@ const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [{ path: "", element: <Home /> }],
   },
+  {
+    path: "/:username",
+    element: <ProtectedRoute />,
+    children: [{ path: "/:username", element: <Profile /> }],
+  },
+
   ,
   { path: "/signup", element: <SignUp /> },
   { path: "/login", element: <Login /> },
   { path: "*", element: <NotFound /> },
-  { path: "/profile", element: <Profile />},
+  
 ]);
 
 createRoot(document.getElementById("root")).render(
