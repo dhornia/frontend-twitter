@@ -34,7 +34,11 @@ function Profile({ user }) {
       tag: "LifeInMars",
       tweets: "97.5K",
     },
-  ];
+];
+  
+
+
+const logos
   
   function Profile() {
     const tweets = useSelector((state) => state.tweets);
