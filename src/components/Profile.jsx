@@ -36,7 +36,7 @@ function Profile({ user }) {
     },
   ];
   
-  function Home() {
+  function Profile() {
     const tweets = useSelector((state) => state.tweets);
     const user = useSelector((state) => state.user);
     const [content, setContent] = useState("");
