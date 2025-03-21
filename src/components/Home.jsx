@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { Container, Row, Col } from "react-bootstrap";
 
 import Tweet from "./Tweet";
 import Avatar from "./Avatar";
 import Trending from "./Trending";
+import LeftCol from "./LeftCol";
 import { setTweets } from "../redux/tweetsSlice";
 
 function Home() {
@@ -58,9 +60,10 @@ function Home() {
 
   return (
     <div className="home">
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-md-8">
+      <Container>
+        <Row>
+          <LeftCol />
+          <Col xs={9} lg={6}>
             <div className="border-blue p-3">
               <p className="text-white fs-4">Home</p>
               <form action="" onSubmit={handlePostTweet} className="d-flex flex-column">
@@ -98,13 +101,10 @@ function Home() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div className="col-4 d-none d-md-block">
-            <Trending />
-          </div>
-        </div>
-      </div>
+          </Col>
+          <Trending />
+        </Row>
+      </Container>
     </div>
   );
 }
