@@ -41,7 +41,7 @@ function Home() {
         },
         data: {
           content,
-          author: user.id,
+          user: user.id,
         },
       });
     } catch (err) {
