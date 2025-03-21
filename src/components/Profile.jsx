@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { nanoid } from "@reduxjs/toolkit";
 
-import imgBg from "../assets/background.jpg";
+
+import bgUser from "./background";
 import Tweet from "./Tweet";
 import Avatar from "./Avatar";
 
 function Profile({ user }) {
   const { likes, content, createdAt, user } = tweet;
-  const { imgBg } = headBg;
-  const { firstname, lastname, username, avatar, bio, following, followers } = user;
+   const { firstname, lastname, username, avatar, bio, following, followers } = user;
   
 }
 
@@ -38,7 +38,19 @@ function Profile({ user }) {
   
 
 
-const logos
+function logos() {
+
+
+
+
+  <button
+  className="badge rounded-pill ms-auto bg-primary border-0 fs-6"
+  style={{ padding: ".8rem" }}
+>
+  Tweet
+</button>
+
+}
   
   function Profile() {
     const tweets = useSelector((state) => state.tweets);
@@ -64,6 +76,11 @@ const logos
         console.log(err);
       }
     };
+
+
+    
+
+
   
     return (
       <div className="home">
@@ -71,7 +88,7 @@ const logos
           <div className="row">
             <div className="col-12 col-md-8">
               <div className="border-start border-end border-bottom border-secondary p-3">
-                <p className="text-white fs-4">Home</p>
+                <img src={bgUser} alt="Background" />
                 <div className="d-flex pt-3 align-items-center">
                   <Avatar imageName={user.userData?.avatar} />
                   <p className="fs-4 text-secondary mb-0">What's happening?</p>
@@ -126,5 +143,5 @@ const logos
     );
   }
   
-  export default Home;
+  export default Profile;
   
