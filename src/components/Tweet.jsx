@@ -5,7 +5,6 @@ import LikeButton from "./LikeButton";
 
 function Tweet({ tweet }) {
   const { _id, content, createdAt, likes, user } = tweet;
-  console.log(_id);
   const { firstname, lastname, username, avatar } = user;
 
   return (
