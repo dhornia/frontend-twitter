@@ -16,14 +16,20 @@ function SignUp() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const formValues = new FormData(e.target); //Necesario debido a formidable
-    const response = await axios({
-      url: `${import.meta.env.VITE_API_URL}/users`,
-      method: "post",
-      headers: { "Content-Type": "multipart-form-data" }, //Necesario debido a formidable
-      data: formValues,
-    });
-    navigate("/");
+
+    try {
+      const formValues = new FormData(e.target); //Necesario debido a formidable
+      await axios({
+        url: `${import.meta.env.VITE_API_URL}/users`,
+        method: "post",
+        headers: { "Content-Type": "multipart-form-data" }, //Necesario debido a formidable
+        data: formValues,
+      });
+
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -103,7 +109,7 @@ function SignUp() {
                   <label htmlFor="password" className="form-label" />
                   <input
                     placeholder="Password"
-                    type="text"
+                    type="password"
                     name="password"
                     id="password"
                     className="form-control"

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { setUser } from "../redux/userSlice";
 
@@ -16,13 +17,20 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await axios({
-      url: `${import.meta.env.VITE_API_URL}/tokens`,
-      method: "post",
-      data: { email, password },
-    });
-    dispatch(setUser(response.data));
-    navigate("/");
+
+    try {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/tokens`,
+        method: "post",
+        data: { email, password },
+      });
+
+      dispatch(setUser(response.data));
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      toast.error((err.response && err.response.data.msg) || err.message);
+    }
   };
 
   return (
@@ -56,7 +64,7 @@ function Login() {
                   <label htmlFor="password" className="form-label" />
                   <input
                     placeholder="Password"
-                    type="text"
+                    type="password"
                     name="password"
                     id="password"
                     className="form-control"
