@@ -10,7 +10,7 @@ function Tweet({ tweet }) {
   return (
     <div className="p-3 d-flex gap-3 border-blue">
       <Avatar imageName={avatar} />
-      <div className="text-container">
+      <div className="text-container flex-grow-1">
         <p className="text-white fw-semibold mb-0">
           {firstname} {lastname} &nbsp;&nbsp;
           <span className="text-secondary fw-normal text-break">@{username} • Oct 12</span>
