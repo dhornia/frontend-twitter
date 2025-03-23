@@ -1,37 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Slide, ToastContainer } from "react-toastify";
 
 import "./index.css";
 import { store, persistor } from "./redux/storeConfig.js";
-import SignUp from "./components/SignUp.jsx";
-import Home from "./components/Home.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import Login from "./components/Login.jsx";
-import NotFound from "./components/NotFound.jsx";
-import Profile from "./components/Profile.jsx";
-import Profile from "./components/Profile.jsx";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <ProtectedRoute />,
-    children: [{ path: "", element: <Home /> }],
-  },
-  {
-    path: "/:username",
-    element: <ProtectedRoute />,
-    children: [{ path: "/:username", element: <Profile /> }],
-  },
-
-  ,
-  { path: "/signup", element: <SignUp /> },
-  { path: "/login", element: <Login /> },
-  { path: "*", element: <NotFound /> },
-]);
+import router from "./routes";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
