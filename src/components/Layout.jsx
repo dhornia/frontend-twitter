@@ -77,7 +77,7 @@ function Layout() {
           </Button>
         </div>
 
-        <div className="mb-3">
+        <div className="mb-3 btn-floating">
           <Button
             variant="danger"
             onClick={logout}

@@ -89,3 +89,9 @@ i.custom-color {
     min-width: 200px;
   }
 }
+
+.btn-floating {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
