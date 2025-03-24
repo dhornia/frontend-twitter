@@ -1,112 +1,103 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import Tweet from "./Tweet";
-import Avatar from "./Avatar";
 import Trending from "./Trending";
-import { setTweets } from "../redux/tweetsSlice";
-import ImgBg from "./background";
+import Avatar from "./Avatar";
 
 function Profile() {
-  const tweets = useSelector((state) => state.tweets);
   const user = useSelector((state) => state.user);
-  const [content, setContent] = useState("");
-  const dispatch = useDispatch();
+  const [userData, setUserData] = useState({});
 
-  const getTweets = async () => {
+  const getUser = async () => {
     try {
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/tweets`,
+        url: `${import.meta.env.VITE_API_URL}/users/${user.id}`,
         method: "GET",
         headers: {
           Authorization: `Bearer ${user.accessToken}`,
         },
       });
-
-      dispatch(setTweets(response.data));
+      setUserData(response.data.user);
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const handlePostTweet = async (e) => {
-    e.preventDefault();
-
-    try {
-      await axios({
-        url: `${import.meta.env.VITE_API_URL}/tweets`,
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-        data: {
-          content,
-          user: user.id,
-        },
-      });
-    } catch (err) {
-      console.log(err);
-    }
-
-    setContent("");
-    getTweets();
   };
 
   useEffect(() => {
-    getTweets();
-  }, []);
+    if (user) getUser();
+  }, [user]);
 
   return (
-    <div className="Profile">
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-md-8">
-            <div className="border-blue p-3">
-              <p className="text-white fs-4">Profile</p>
-              <form action="" onSubmit={handlePostTweet} className="d-flex flex-column">
-                <div className="d-flex pt-3 align-items-center">
-                  <div className="me-3">
-                    <Avatar imageName={user.avatar} />
+    userData && (
+      <div className="profile">
+        <div className="container ms-0">
+          <div className="row">
+            <div className="col-12 col-md-8 col-lg-8">
+              <div className="border-blue position-relative">
+                <div className="profile-header-img">
+                  <div className="profile-avatar-wrapper position-relative">
+                    <Avatar
+                      imageName={userData.avatar}
+                      classes={
+                        "object-fit-cover border border-5 border-white rounded-circle w-100 h-100"
+                      }
+                    />
                   </div>
-                  <label htmlFor="content" className="fs-4 text-secondary mb-0">
-                    What's happening?
-                  </label>
                 </div>
-                <div className="mb-3 d-flex pt-3">
-                  <textarea
-                    id="content"
-                    name="content"
-                    rows="1"
-                    className="form-control bg-transparent w-100 text-white border-0 d-flex"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                  ></textarea>
+
+                <div className="user-info d-flex flex-column px-4">
+                  <div className="d-flex">
+                    <div>
+                      <p className="fs-4 text-white mb-0">
+                        {userData.firstname} {userData.lastname}
+                      </p>
+                      <p className="text-secondary">@{userData.username}</p>
+                    </div>
+                    <div className="d-flex gap-3 ms-auto">
+                      <p className="text-white">
+                        {userData.followings?.length}
+                        <span className="text-secondary"> Following</span>
+                      </p>
+                      <p className="text-white">
+                        {userData.followers?.length}
+                        <span className="text-secondary"> Followers</span>
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-white">{userData.bio}</p>
+                  {userData.tweets?.length > 0 && (
+                    <div className="flex">
+                      <p
+                        className="text-white border-bottom border-primary border-2 mb-0 pb-2"
+                        style={{ display: "inline-block" }}
+                      >
+                        Tweets
+                      </p>
+                    </div>
+                  )}
                 </div>
-                <button
-                  className="badge rounded-pill ms-auto bg-primary border-0 fs-6"
-                  style={{ padding: ".8rem" }}
-                >
-                  Tweet
-                </button>
-              </form>
+              </div>
+
+              {userData.tweets?.length > 0 ? (
+                <ul className="p-0 list-unstyled">
+                  {userData.tweets.map((tweet) => (
+                    <li key={tweet._id}>
+                      <Tweet tweet={tweet} author={userData} />
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <></>
+              )}
             </div>
 
-            <ul className="p-0 list-unstyled">
-              {tweets.map((tweet) => (
-                <li key={tweet._id}>
-                  <Tweet tweet={tweet} />
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col-4 d-none d-md-block">
             <Trending />
           </div>
         </div>
       </div>
-    </div>
+    )
   );
 }
 

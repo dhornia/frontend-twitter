@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NotFound = () => {
+const Forbidden = () => {
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-dark text-white">
       <div className="text-center">
-        <h1 className="display-4">404 - Page Not Found</h1>
-        <p className="lead">The page you're looking for doesn't exist.</p>
+        <h1 className="display-4">403 - Forbidden</h1>
+        <p className="lead">You do not have permission to access this page.</p>
         <Link to="/" className="btn btn-primary">
           Go Back to Home
         </Link>
@@ -15,4 +15,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default Forbidden;
