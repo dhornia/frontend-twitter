@@ -14,7 +14,7 @@ function Layout() {
   };
 
   return (
-    <div className="app-container d-flex">
+    <div className="app-container d-flex justify-content-center">
       <div className="sidebar d-flex flex-column p-3">
         <div className="mb-3">
           <Link
@@ -67,7 +67,7 @@ function Layout() {
           </Link>
         </div>
 
-        <div className="mb-3 mt-auto">
+        <div className="mb-3  btn-floating">
           <Button
             variant="danger"
             onClick={logout}

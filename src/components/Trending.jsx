@@ -24,7 +24,7 @@ const trending = [
 
 function Trending() {
   return (
-    <div className="trending align-self-start mt-4 p-3 d-none d-md-block col col-md-4 col-lg-4">
+    <div className="trending col col-md-4 col-lg-4 align-self-start mt-4 p-3 d-none d-md-block">
       <p className="text-white fw-bold fs-5">What's happening</p>
       <ul className="list-unstyled">
         {trending.map((item) => (

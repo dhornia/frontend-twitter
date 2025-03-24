@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 import { toggleLike } from "../redux/tweetsSlice";
+import DeleteTweetModal from "./DeleteTweetModal";
 
 function LikeButton({ tweetId, likesQty }) {
   const tweets = useSelector((state) => state.tweets);
@@ -13,7 +13,6 @@ function LikeButton({ tweetId, likesQty }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isProfilePath = pathname.includes("profile");
-  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
   const isLiked = tweets
@@ -40,21 +39,6 @@ function LikeButton({ tweetId, likesQty }) {
     }
   };
 
-  const handleRemoveTweet = async () => {
-    try {
-      await axios({
-        url: `${import.meta.env.VITE_API_URL}/tweets/${tweetId}`,
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-      });
-      navigate(`/profile/${user.username}}`);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <>
       <div className="d-flex justify-content-between">
@@ -70,28 +54,17 @@ function LikeButton({ tweetId, likesQty }) {
           </span>
         </div>
         {isProfilePath && (
-          <div>
-            <i className="bi bi-trash3-fill text-danger pointer" onClick={handleRemoveTweet}></i>
-          </div>
+          <>
+            <div>
+              <i
+                className="bi bi-trash3-fill text-danger pointer"
+                onClick={() => setShowModal(true)}
+              ></i>
+            </div>
+          </>
         )}
+        <DeleteTweetModal tweetId={tweetId} showModal={showModal} setShowModal={setShowModal} />
       </div>
-
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirmar Eliminación</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>¿Estás seguro de que deseas eliminar este tweet?</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Cancelar
-          </Button>
-          <Button variant="danger" onClick={handleRemoveTweet}>
-            Eliminar
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 }

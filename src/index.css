@@ -58,10 +58,6 @@ i.custom-color {
   height: 100px;
 }
 
-.profile-avatar {
-  background-size: 140% auto;
-}
-
 .user-info {
   padding-top: 65px;
 }
@@ -94,4 +90,12 @@ i.custom-color {
   position: fixed;
   bottom: 20px;
   left: 20px;
+}
+
+.btn-close {
+  color: red;
+}
+
+img {
+  aspect-ratio: 1/1;
 }

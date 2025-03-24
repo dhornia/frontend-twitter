@@ -35,7 +35,7 @@ function Login() {
 
   return (
     <div className="full-screen-dark-blue d-flex justify-content-center align-items-center p-5">
-      <Container>
+      <Container style={{ maxWidth: "1140px" }}>
         <Row>
           <Col md={6} className="rounded-start secondary-dark-blue d-none d-md-flex">
             <div className="p-5 d-flex align-items-start flex-column">

@@ -59,7 +59,7 @@ function Home() {
   return (
     <div className="home container p-0">
       <div className="row">
-        <div className="col-12 col-md-8 col-lg-6">
+        <div className="col-12 col-md-8 col-lg-8">
           <div className="border-blue p-3">
             <p className="text-white fs-4">Home</p>
             <form onSubmit={handlePostTweet} className="d-flex flex-column">
@@ -94,7 +94,7 @@ function Home() {
           <ul className="p-0 list-unstyled">
             {tweets.map((tweet) => (
               <li key={tweet._id}>
-                <Tweet tweet={tweet} />
+                <Tweet tweet={tweet} author={tweet.user} />
               </li>
             ))}
           </ul>

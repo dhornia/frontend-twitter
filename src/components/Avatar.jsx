@@ -1,11 +1,13 @@
 import React from "react";
+import Image from "react-bootstrap/Image";
 
-function Avatar({ imageName }) {
+function Avatar({ imageName, classes }) {
   return (
-    <img
+    <Image
       src={`${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${imageName}`}
       alt="Avatar"
-      className="avatar"
+      className={`avatar ${classes}`}
+      fluid
     />
   );
 }
