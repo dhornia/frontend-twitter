@@ -67,16 +67,16 @@ function Home() {
                 <div className="me-3">
                   <Avatar imageName={user.avatar} />
                 </div>
-                <label htmlFor="content" className="fs-4 text-secondary mb-0">
-                  What's happening?
-                </label>
               </div>
               <div className="mb-3 d-flex pt-3">
                 <textarea
+                  type="text"
+                  placeholder="What's happening?"
                   id="content"
                   name="content"
+                  maxLength={140}
                   rows="1"
-                  className="form-control bg-transparent w-100 text-white border-0 d-flex"
+                  className="form-control rounded-lg w-full p-2 bg-transparent w-100 text-white border-0 d-flex"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                 ></textarea>
