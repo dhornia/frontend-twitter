@@ -67,7 +67,7 @@ function Layout() {
           </Link>
         </div>
 
-        <div className="mb-3  btn-floating">
+        <div className="mb-3 btn-floating">
           <Button
             variant="danger"
             onClick={logout}
@@ -75,9 +75,6 @@ function Layout() {
           >
             <span className="d-none d-md-inline">Logout</span>
           </Button>
-        </div>
-
-        <div className="mb-3 btn-floating">
           <Button
             variant="danger"
             onClick={logout}

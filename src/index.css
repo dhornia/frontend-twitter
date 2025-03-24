@@ -88,8 +88,8 @@ i.custom-color {
 
 .btn-floating {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  margin-top: 87vh;
+  width: 168px;
 }
 
 .btn-close {
